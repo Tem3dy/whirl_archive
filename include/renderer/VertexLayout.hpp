@@ -19,10 +19,17 @@ enum class VertexFormat
     FLOAT,
 };
 
+enum class AdvanceRate
+{
+    INSTANCE,
+    VERTEX,
+};
+
 struct VertexAttribute
 {
     const uint32_t size;
     const VertexFormat format;
+    const AdvanceRate rate = AdvanceRate::VERTEX;
 };
 
 namespace VertexLayout
@@ -30,7 +37,7 @@ namespace VertexLayout
     // Factory method for semantic meaning
     inline std::vector<VertexAttribute> New(const std::initializer_list<VertexAttribute>& attributes)
     {
-        return {attributes};
+        return { attributes };
     }
 
     inline uint32_t GetStride(const std::vector<VertexAttribute>& attributes) noexcept
