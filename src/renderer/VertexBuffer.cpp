@@ -5,32 +5,32 @@
 
 VertexBuffer::VertexBuffer()
 {
-    glGenBuffers(1, &m_buffer);
-    WHIRL_DEBUG("Creating vertex buffer: {}", m_buffer);
+    glGenBuffers(1, &m_handle);
+    WHIRL_DEBUG("Creating vertex buffer: {}", m_handle);
 }
 
 VertexBuffer::~VertexBuffer()
 {
-    if (m_buffer != 0)
+    if (m_handle != 0)
     {
         // Paranoia
-        WHIRL_DEBUG("Deleting vertex buffer: {}", m_buffer);
-        glDeleteBuffers(1, &m_buffer);
+        WHIRL_DEBUG("Deleting vertex buffer: {}", m_handle);
+        glDeleteBuffers(1, &m_handle);
     }
 }
 
 VertexBuffer::VertexBuffer(VertexBuffer&& other) noexcept
-    : m_buffer(other.m_buffer)
+    : m_handle(other.m_handle)
 {
-    other.m_buffer = 0;
+    other.m_handle = 0;
 }
 
 VertexBuffer& VertexBuffer::operator=(VertexBuffer&& other) noexcept
 {
     if (this != &other)
     {
-        m_buffer = other.m_buffer;
-        other.m_buffer = 0;
+        m_handle = other.m_handle;
+        other.m_handle = 0;
     }
 
     return *this;
@@ -43,7 +43,7 @@ void VertexBuffer::Data(const void* data, uint32_t size, DrawMode mode)
 
 void VertexBuffer::Bind() const
 {
-    glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, m_handle);
 }
 
 void VertexBuffer::Unbind() const
@@ -53,5 +53,5 @@ void VertexBuffer::Unbind() const
 
 uint32_t VertexBuffer::GetBuffer() const
 {
-    return m_buffer;
+    return m_handle;
 }

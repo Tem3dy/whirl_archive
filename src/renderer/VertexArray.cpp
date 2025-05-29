@@ -14,12 +14,12 @@ VertexArray::VertexArray(VertexBuffer&& vertexBuf, IndexBuffer&& indexBuf, const
       m_indexBuf(std::make_unique<IndexBuffer>(std::move(indexBuf))),
       m_layout(layout)
 {
-    glGenVertexArrays(1, &m_array);
-    WHIRL_DEBUG("Creating vertex array: {}", m_array);
+    glGenVertexArrays(1, &m_handle);
+    WHIRL_DEBUG("Creating vertex array: {}", m_handle);
 
     // Configure
     WHIRL_TRACE("Configuring vertex array attributes...");
-    glBindVertexArray(m_array);
+    glBindVertexArray(m_handle);
     m_vertexBuf->Bind();
     m_indexBuf->Bind();
 
@@ -61,16 +61,16 @@ VertexArray::VertexArray(VertexBuffer&& vertexBuf, IndexBuffer&& indexBuf, const
 
 VertexArray::~VertexArray()
 {
-    if (m_array != 0)
+    if (m_handle != 0)
     {
-        WHIRL_DEBUG("Deleting vertex array: {}", m_array);
-        glDeleteVertexArrays(1, &m_array);
+        WHIRL_DEBUG("Deleting vertex array: {}", m_handle);
+        glDeleteVertexArrays(1, &m_handle);
     }
 }
 
 void VertexArray::Bind() const
 {
-    glBindVertexArray(m_array);
+    glBindVertexArray(m_handle);
 }
 
 void VertexArray::Unbind() const
@@ -80,7 +80,7 @@ void VertexArray::Unbind() const
 
 uint32_t VertexArray::GetArray() const
 {
-    return m_array;
+    return m_handle;
 }
 
 VertexBuffer& VertexArray::GetVertexBuffer() const

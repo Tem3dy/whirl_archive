@@ -23,5 +23,5 @@ public:
     bool SetMat4(const std::string& name, const glm::mat4& matrix);
 
 private:
-    unsigned int m_program = 0;
+    unsigned int m_handle = 0;
 };

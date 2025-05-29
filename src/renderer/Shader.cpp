@@ -144,7 +144,7 @@ Shader::Shader(const std::string& path)
     shaderFile.close();
 
     // Pass shaders to OpenGL
-    m_program = glCreateProgram();
+    m_handle = glCreateProgram();
     unsigned int vShader = glCreateShader(GL_VERTEX_SHADER);
     unsigned int fShader = glCreateShader(GL_FRAGMENT_SHADER);
 
@@ -152,7 +152,7 @@ Shader::Shader(const std::string& path)
     {
         Compile(vShader, vShaderCode.c_str());
         Compile(fShader, fShaderCode.c_str());
-        Link(m_program, vShader, fShader);
+        Link(m_handle, vShader, fShader);
         WHIRL_TRACE("Shader constructed successfully from file: {}", path);
     }
     catch (WhirlError& error)
@@ -164,16 +164,16 @@ Shader::Shader(const std::string& path)
 
 Shader::~Shader()
 {
-    if (m_program != 0)
+    if (m_handle != 0)
     {
-        WHIRL_DEBUG("Deleting shader program: {}", m_program);
-        glDeleteProgram(m_program);
+        WHIRL_DEBUG("Deleting shader program: {}", m_handle);
+        glDeleteProgram(m_handle);
     }
 }
 
 void Shader::Use() const
 {
-    if (m_program == 0)
+    if (m_handle == 0)
     {
         // Consider throwing an exception here too
         WHIRL_ERROR("Tried to use an invalid shader");
@@ -181,7 +181,7 @@ void Shader::Use() const
     }
 
     // Use shader
-    glUseProgram(m_program);
+    glUseProgram(m_handle);
 }
 
 static std::optional<int> GetLocation(uint32_t handle, const std::string& name)
@@ -198,7 +198,7 @@ static std::optional<int> GetLocation(uint32_t handle, const std::string& name)
 
 bool Shader::SetBool(const std::string& name, bool value)
 {
-    auto location = GetLocation(m_program, name);
+    auto location = GetLocation(m_handle, name);
     if (!location)
         return false;
 
@@ -208,7 +208,7 @@ bool Shader::SetBool(const std::string& name, bool value)
 
 bool Shader::SetInt(const std::string& name, int value)
 {
-    auto location = GetLocation(m_program, name);
+    auto location = GetLocation(m_handle, name);
     if (!location)
         return false;
 
@@ -218,7 +218,7 @@ bool Shader::SetInt(const std::string& name, int value)
 
 bool Shader::SetUInt(const std::string& name, unsigned int value)
 {
-    auto location = GetLocation(m_program, name);
+    auto location = GetLocation(m_handle, name);
     if (!location)
         return false;
 
@@ -228,7 +228,7 @@ bool Shader::SetUInt(const std::string& name, unsigned int value)
 
 bool Shader::SetFloat(const std::string& name, float value)
 {
-    auto location = GetLocation(m_program, name);
+    auto location = GetLocation(m_handle, name);
     if (!location)
         return false;
 
@@ -238,7 +238,7 @@ bool Shader::SetFloat(const std::string& name, float value)
 
 bool Shader::SetMat4(const std::string& name, const glm::mat4& matrix)
 {
-    auto location = GetLocation(m_program, name);
+    auto location = GetLocation(m_handle, name);
     if (!location)
         return false;
 

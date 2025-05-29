@@ -31,7 +31,7 @@ public:
     IndexBuffer& GetIndexBuffer() const;
 
 private:
-    uint32_t m_array = 0;
+    uint32_t m_handle = 0;
     std::unique_ptr<VertexBuffer> m_vertexBuf;
     std::unique_ptr<IndexBuffer> m_indexBuf;
     std::vector<VertexAttribute> m_layout;
