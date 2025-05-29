@@ -11,18 +11,6 @@
 
 GuiRenderer::GuiRenderer()
 {
-    try
-    {
-        m_quadRenderer = std::make_unique<QuadRenderer>();
-        m_roundedQuadRenderer = std::make_unique<RoundedQuadRenderer>();
-        m_circleRenderer = std::make_unique<CircleRenderer>();
-    }
-    catch (WhirlError& error)
-    {
-        error.Context("Failed to create quad renderer");
-        throw;
-    }
-
     WHIRL_TRACE("Renderer opened successfully");
 }
 
@@ -33,7 +21,7 @@ GuiRenderer::~GuiRenderer()
 
 void GuiRenderer::DrawQuad(float x, float y, float w, float h, uint32_t color)
 {
-    m_quadRenderer->Submit({x, y, w, h, color});
+
 }
 
 void GuiRenderer::DrawVLine(float x, float y, float length, float thickness, uint32_t color)
@@ -48,19 +36,17 @@ void GuiRenderer::DrawHLine(float x, float y, float length, float thickness, uin
 
 void GuiRenderer::DrawRoundedQuad(float x, float y, float w, float h, float radius, uint32_t color)
 {
-    m_roundedQuadRenderer->Submit({x, y, w, h, radius, color});
+
 }
 
 void GuiRenderer::DrawCircle(float x, float y, float radius, uint32_t color)
 {
-    m_circleRenderer->Submit({x, y, radius, color});
+
 }
 
 void GuiRenderer::Submit()
 {
-    m_quadRenderer->Draw(m_projection);
-    m_roundedQuadRenderer->Draw(m_projection);
-    m_circleRenderer->Draw(m_projection);
+    
 }
 
 void GuiRenderer::Adjust(int width, int height)

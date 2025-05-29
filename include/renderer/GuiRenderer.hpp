@@ -6,9 +6,6 @@
 
 #include "Math.hpp"
 #include "Color.hpp"
-#include "QuadRenderer.hpp"
-#include "RoundedQuadRenderer.hpp"
-#include "CircleRenderer.hpp"
 
 class GuiRenderer
 {
@@ -33,9 +30,4 @@ public:
 
 private:
     glm::mat4 m_projection;
-
-    // Renderers
-    std::unique_ptr<QuadRenderer> m_quadRenderer;
-    std::unique_ptr<RoundedQuadRenderer> m_roundedQuadRenderer;
-    std::unique_ptr<CircleRenderer> m_circleRenderer;
 };
