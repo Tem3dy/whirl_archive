@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <stdexcept>
+#include <optional>
 
 #include <glad/gl.h>
 #include <fmt/core.h>
@@ -183,67 +184,64 @@ void Shader::Use() const
     glUseProgram(m_program);
 }
 
-bool Shader::SetBool(const std::string& name, bool value)
+static std::optional<int> GetLocation(uint32_t handle, const std::string& name)
 {
-    int location = glGetUniformLocation(m_program, name.c_str());
+    int location = glGetUniformLocation(handle, name.c_str());
     if (location == -1)
     {
-        WHIRL_ERROR("Tried uploading a uniform bool to an unknown variable: {}", name);
-        return false;
+        WHIRL_ERROR("Tried uploading a uniform to an unknown variable: {}", name);
+        return std::nullopt;
     }
 
-    glUniform1i(location, value);
+    return location;
+}
+
+bool Shader::SetBool(const std::string& name, bool value)
+{
+    auto location = GetLocation(m_program, name);
+    if (!location)
+        return false;
+
+    glUniform1i(*location, value);
     return true;
 }
 
 bool Shader::SetInt(const std::string& name, int value)
 {
-    int location = glGetUniformLocation(m_program, name.c_str());
-    if (location == -1)
-    {
-        WHIRL_ERROR("Tried uploading a uniform int to an unknown variable: {}", name);
+    auto location = GetLocation(m_program, name);
+    if (!location)
         return false;
-    }
 
-    glUniform1i(location, value);
+    glUniform1i(*location, value);
     return true;
 }
 
 bool Shader::SetUInt(const std::string& name, unsigned int value)
 {
-    int location = glGetUniformLocation(m_program, name.c_str());
-    if (location == -1)
-    {
-        WHIRL_ERROR("Tried uploading a uniform uint to an unknown variable: {}", name);
+    auto location = GetLocation(m_program, name);
+    if (!location)
         return false;
-    }
 
-    glUniform1ui(location, value);
+    glUniform1ui(*location, value);
     return true;
 }
 
 bool Shader::SetFloat(const std::string& name, float value)
 {
-    int location = glGetUniformLocation(m_program, name.c_str());
-    if (location == -1)
-    {
-        WHIRL_ERROR("Tried uploading a uniform float to an unknown variable: {}", name);
+    auto location = GetLocation(m_program, name);
+    if (!location)
         return false;
-    }
 
-    glUniform1f(location, value);
+    glUniform1f(*location, value);
     return true;
 }
 
 bool Shader::SetMat4(const std::string& name, const glm::mat4& matrix)
 {
-    int location = glGetUniformLocation(m_program, name.c_str());
-    if (location == -1)
-    {
-        WHIRL_ERROR("Tried uploading a uniform mat4 to an unknown variable: {}", name);
+    auto location = GetLocation(m_program, name);
+    if (!location)
         return false;
-    }
 
-    glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+    glUniformMatrix4fv(*location, 1, GL_FALSE, glm::value_ptr(matrix));
     return true;
 }
