@@ -7,9 +7,9 @@
 #include <glad/gl.h>
 #include <fmt/core.h>
 
-#include "Shader.hpp"
-#include "Logger.hpp"
-#include "WhirlError.hpp"
+#include <Shader.hpp>
+#include <Logger.hpp>
+#include <WhirlError.hpp>
 
 static void Compile(unsigned int shader, const char* source)
 {

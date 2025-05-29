@@ -4,10 +4,10 @@
 #include <cstddef>
 #include <memory>
 
-#include "VertexLayout.hpp"
-#include "VertexArray.hpp"
-#include "VertexBuffer.hpp"
-#include "IndexBuffer.hpp"
+#include <VertexLayout.hpp>
+#include <VertexArray.hpp>
+#include <VertexBuffer.hpp>
+#include <IndexBuffer.hpp>
 
 enum class RenderMode
 {

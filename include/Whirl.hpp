@@ -2,7 +2,7 @@
 
 #include <optional>
 
-#include "GuiApplication.hpp"
+#include <GuiApplication.hpp>
 
 namespace Whirl
 {

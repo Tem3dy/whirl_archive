@@ -1,5 +1,5 @@
-#include "Whirl.hpp"
-#include "Logger.hpp"
+#include <Whirl.hpp>
+#include <Logger.hpp>
 
 std::optional<GuiApplication> Whirl::CreateApplication(int width, int height, const std::string& title)
 {

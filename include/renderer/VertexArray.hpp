@@ -2,8 +2,8 @@
 
 #include <cstdint>
 
-#include "VertexBuffer.hpp"
-#include "VertexLayout.hpp"
+#include <VertexBuffer.hpp>
+#include <VertexLayout.hpp>
 
 class VertexArray
 {

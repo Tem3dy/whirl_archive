@@ -2,8 +2,8 @@
 
 #include <memory>
 
-#include "VideoMode.hpp"
-#include "GuiRenderer.hpp"
+#include <VideoMode.hpp>
+#include <GuiRenderer.hpp>
 
 // Could forward declare VideoMode and GuiRenderer too (probably not necessary)
 struct GLFWwindow;

@@ -5,8 +5,8 @@
 
 #include <glad/gl.h>
 
-#include "DrawMode.hpp"
-#include "Logger.hpp"
+#include <DrawMode.hpp>
+#include <Logger.hpp>
 
 class IndexBuffer
 {

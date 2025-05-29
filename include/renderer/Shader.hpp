@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "Math.hpp"
+#include <Math.hpp>
 
 class Shader
 {

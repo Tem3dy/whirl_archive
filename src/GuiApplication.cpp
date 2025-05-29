@@ -1,9 +1,9 @@
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
 
-#include "GuiApplication.hpp"
-#include "Logger.hpp"
-#include "WhirlError.hpp"
+#include <GuiApplication.hpp>
+#include <Logger.hpp>
+#include <WhirlError.hpp>
 
 GuiApplication::GuiApplication(const VideoMode& mode)
     : m_mode(mode),

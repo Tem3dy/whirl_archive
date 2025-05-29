@@ -4,8 +4,8 @@
 #include <vector>
 #include <memory>
 
-#include "Math.hpp"
-#include "Color.hpp"
+#include <Math.hpp>
+#include <Color.hpp>
 
 class GuiRenderer
 {

@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "fmt/format.h"
+#include <fmt/format.h>
 
 class WhirlError : public std::exception
 {

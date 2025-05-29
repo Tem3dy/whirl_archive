@@ -7,7 +7,7 @@
 
 #include <glad/gl.h>
 
-#include "Logger.hpp"
+#include <Logger.hpp>
 
 // Always 4 bytes, make this more flexible later on
 constexpr size_t FORMAT_SIZE = 4;

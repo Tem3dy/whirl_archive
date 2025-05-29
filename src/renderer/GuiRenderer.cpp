@@ -4,10 +4,10 @@
 
 #include <glad/gl.h>
 
-#include "Math.hpp"
-#include "GuiRenderer.hpp"
-#include "Logger.hpp"
-#include "WhirlError.hpp"
+#include <Math.hpp>
+#include <GuiRenderer.hpp>
+#include <Logger.hpp>
+#include <WhirlError.hpp>
 
 GuiRenderer::GuiRenderer()
 {
