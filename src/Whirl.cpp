@@ -1,7 +1,9 @@
 #include <Whirl.hpp>
 #include <Logger.hpp>
+#include <GuiApplication.hpp>
+#include <VideoMode.hpp>
 
-std::optional<GuiApplication> Whirl::CreateApplication(int width, int height, const std::string& title)
+std::optional<GuiApplication> Whirl::CreateApplication(uint32_t width, uint32_t height, const std::string& title)
 {
     if (title.empty())
     {
@@ -9,17 +11,9 @@ std::optional<GuiApplication> Whirl::CreateApplication(int width, int height, co
         return std::nullopt;
     }
     
-    if (width <= 0)
-    {
-        WHIRL_FATAL("Width cannot be <= 0");
-        return std::nullopt;
-    }
-
-    if (height <= 0)
-    {
-        WHIRL_FATAL("Height cannot be <= 0");
-        return std::nullopt;
-    }
-
-    return GuiApplication({width, height, title});
+    return GuiApplication(VideoMode {
+        .width = static_cast<int>(width),
+        .height = static_cast<int>(height),
+        .title = title
+    });
 }

@@ -6,5 +6,5 @@
 
 namespace Whirl
 {
-    std::optional<GuiApplication> CreateApplication(int width, int height, const std::string& title);
+    std::optional<GuiApplication> CreateApplication(uint32_t width, uint32_t height, const std::string& title);
 };
